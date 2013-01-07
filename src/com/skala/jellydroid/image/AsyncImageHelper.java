@@ -48,6 +48,10 @@ public class AsyncImageHelper {
 		});
 	}
 
+	public void cancel() {
+		mDownloader.cancel();
+	}
+
 	public interface AsyncImageListener {
 		public void onLoad(Bitmap bitmap);
 	}

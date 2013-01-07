@@ -21,6 +21,8 @@ import android.os.Environment;
 public class FileDownloader {
 	private final static String CACHE_DIR = "Android/.jellydroid";
 
+	private FileDownloadTask mDownloadTask;
+
 	/**
 	 * Downloads a file from URL and saves in external storage or loads from cache if already downloaded.
 	 * @param url URL of the file.
@@ -31,7 +33,8 @@ public class FileDownloader {
 		if (cachedFile.exists()) {
 			listener.onSuccess(cachedFile);
 		} else {
-			new FileDownloadTask(url, listener).execute();
+			mDownloadTask = new FileDownloadTask(url, listener);
+			mDownloadTask.execute();
 		}
 	}
 
@@ -94,6 +97,12 @@ public class FileDownloader {
 			if (result != null) {
 				mListener.onSuccess(result);
 			}
+		}
+	}
+
+	public void cancel() {
+		if (mDownloadTask != null) {
+			mDownloadTask.cancel(true);
 		}
 	}
 
