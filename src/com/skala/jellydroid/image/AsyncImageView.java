@@ -12,7 +12,7 @@ import com.skala.jellydroid.file.FileDownloader;
 import com.skala.jellydroid.file.FileDownloader.FileDownloadListener;
 
 /**
- * ImageView that can load remote images quick and easy.
+ * ImageView that can load remote images quickly and easily.
  * @author Matous Skala
  *
  */

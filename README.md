@@ -5,10 +5,10 @@ The missing Android utilities library. It's a collection of the classes for fast
 
 Features
 --------
-**AsyncImageHelper** - Helper that makes loading remote images quick and easy.
+**AsyncImageView** - ImageView that can load remote images quickly and easily.
 
-    AsyncImageHelper asyncImageHelper = new AsyncImageHelper();
-    asyncImageHelper.loadImage(findViewById(R.id.imageView), "http://example.org/image.jpg");
+    AsyncImageView asyncImageView = findViewById(R.id.image);
+    asyncImageView.loadImage("http://example.org/image.jpg");
 
 
 **FileDownloader** - FileDownloader helps with downloading and storing remote files.
