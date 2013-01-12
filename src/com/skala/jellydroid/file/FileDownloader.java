@@ -75,7 +75,7 @@ public class FileDownloader {
 
 				byte data[] = new byte[1024];
 				int count;
-				while ((count = input.read(data)) != -1) {
+				while (!isCancelled() && (count = input.read(data)) != -1) {
 					output.write(data, 0, count);
 				}
 
@@ -84,6 +84,11 @@ public class FileDownloader {
 				input.close();
 
 				file = new File(fileName);
+
+				if (isCancelled()) {
+					file.delete();
+					return null;
+				}
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
