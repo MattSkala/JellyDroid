@@ -17,10 +17,12 @@ import com.skala.jellydroid.file.FileDownloader.FileDownloadListener;
  *
  */
 public class AsyncImageView extends ImageView {
-	private final FileDownloader mDownloader = new FileDownloader();
+	private final FileDownloader mDownloader;
 
 	public AsyncImageView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+
+		mDownloader = new FileDownloader(context);
 	}
 
 	/**

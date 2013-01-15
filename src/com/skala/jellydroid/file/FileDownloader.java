@@ -10,8 +10,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Environment;
+
+import com.skala.jellydroid.utils.PackageUtils;
 
 /**
  * FileDownloader helps with downloading and storing remote files.
@@ -19,9 +22,12 @@ import android.os.Environment;
  *
  */
 public class FileDownloader {
-	private final static String CACHE_DIR = "Android/.jellydroid";
-
+	private final String mCacheDir;
 	private FileDownloadTask mDownloadTask;
+
+	public FileDownloader(Context context) {
+		mCacheDir = PackageUtils.getDataDir(context);
+	}
 
 	/**
 	 * Downloads a file from URL and saves in external storage or loads from cache if already downloaded.
@@ -43,7 +49,7 @@ public class FileDownloader {
 	}
 
 	private String getPath() {
-		return Environment.getExternalStorageDirectory() + "/" + CACHE_DIR;
+		return Environment.getExternalStorageDirectory() + "/" + mCacheDir;
 	}
 
 	private String getFileName(String url) {

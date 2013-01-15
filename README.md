@@ -13,7 +13,7 @@ Features
 
 **FileDownloader** - FileDownloader helps with downloading and storing remote files.
 
-    FileDownloader fileDownloader = new FileDownloader();
+    FileDownloader fileDownloader = new FileDownloader(getApplicationContext());
     fileDownloader.download("http://example.org/file.zip", new FileDownloadListener() {
         @Override
         public void onSuccess(File file) {
