@@ -16,14 +16,16 @@ import android.os.AsyncTask;
 
 import com.skala.jellydroid.api.ApiHelper.StringResponseListener;
 
-class FetchUrlTask extends AsyncTask<Object, Void, Void> {
+class FetchUrlTask extends AsyncTask<Object, Void, String> {
+
+	private StringResponseListener mListener;
 
 	@Override
-	protected Void doInBackground(Object... params) {
+	protected String doInBackground(Object... params) {
 		// TODO: check internet connection
 
 		String url = (String) params[0];
-		StringResponseListener listener = (StringResponseListener) params[1];
+		mListener = (StringResponseListener) params[1];
 
 		try {
 			HttpClient client = new DefaultHttpClient();
@@ -43,13 +45,19 @@ class FetchUrlTask extends AsyncTask<Object, Void, Void> {
 			}
 			buf.close();
 			ips.close();
-			listener.onSuccess(sb.toString());
+
+			return sb.toString();
 		} catch (IOException e) {
-			listener.onError(e);
+			mListener.onError(e);
 		} catch (URISyntaxException e) {
-			listener.onError(e);
+			mListener.onError(e);
 		}
 		return null;
+	}
+
+	@Override
+	protected void onPostExecute(String result) {
+		mListener.onSuccess(result);
 	}
 
 }
