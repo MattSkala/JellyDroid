@@ -3,13 +3,18 @@ package com.skala.jellydroid.net;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+
 public class ApiHelper {
 	FetchUrlTask mFetchUrlTask;
+	Context mContext;
 
-	public ApiHelper() { }
+	public ApiHelper(Context context) {
+		mContext = context;
+	}
 
 	public void fetchString(String url, StringResponseListener listener) {
-		new FetchUrlTask().execute(url, listener);
+		new FetchUrlTask(mContext).execute(url, listener);
 	}
 
 	public void fetchJson(String url, final JsonResponseListener listener) {
@@ -17,6 +22,11 @@ public class ApiHelper {
 			@Override
 			public void onSuccess(String stringResponse) {
 				JSONObject jsonResponse = null;
+				if (stringResponse == null || stringResponse.length() == 0) {
+					listener.onSuccess(null);
+					return;
+				}
+
 				try {
 					jsonResponse = new JSONObject(stringResponse);
 				} catch (JSONException e) {

@@ -12,20 +12,28 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.skala.jellydroid.net.ApiHelper.StringResponseListener;
+import com.skala.jellydroid.util.Utils;
 
 class FetchUrlTask extends AsyncTask<Object, Void, String> {
-
+	private final Context mContext;
 	private StringResponseListener mListener;
+
+	public FetchUrlTask(Context context) {
+		mContext = context;
+	}
 
 	@Override
 	protected String doInBackground(Object... params) {
-		// TODO: check internet connection
-
 		String url = (String) params[0];
 		mListener = (StringResponseListener) params[1];
+
+		if (!Utils.isOnline(mContext)) {
+			return null;
+		}
 
 		try {
 			HttpClient client = new DefaultHttpClient();

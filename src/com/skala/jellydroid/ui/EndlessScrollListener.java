@@ -49,6 +49,12 @@ public abstract class EndlessScrollListener implements OnScrollListener {
 	 */
 	public abstract void loadMoreItems(int page);
 
+	/**
+	 * Called when all items are fetched. It can be used to remove loading view from footer.
+	 */
+	public void onComplete() {
+	}
+
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		// We do not need to implement

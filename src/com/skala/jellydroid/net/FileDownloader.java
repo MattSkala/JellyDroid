@@ -14,7 +14,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Environment;
 
-import com.skala.jellydroid.util.PackageUtils;
+import com.skala.jellydroid.util.Utils;
 
 /**
  * FileDownloader helps with downloading and storing remote files.
@@ -26,7 +26,7 @@ public class FileDownloader {
 	private FileDownloadTask mDownloadTask;
 
 	public FileDownloader(Context context) {
-		mCacheDir = PackageUtils.getDataDir(context);
+		mCacheDir = Utils.getDataDir(context);
 	}
 
 	/**
