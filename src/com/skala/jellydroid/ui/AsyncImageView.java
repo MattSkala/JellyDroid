@@ -1,4 +1,4 @@
-package com.skala.jellydroid.net;
+package com.skala.jellydroid.ui;
 
 import java.io.File;
 
@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import com.skala.jellydroid.net.FileDownloader;
 import com.skala.jellydroid.net.FileDownloader.FileDownloadListener;
 
 /**
