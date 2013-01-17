@@ -1,4 +1,4 @@
-package com.skala.jellydroid.api;
+package com.skala.jellydroid.net;
 
 import org.json.JSONException;
 import org.json.JSONObject;

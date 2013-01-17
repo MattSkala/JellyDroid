@@ -1,4 +1,4 @@
-package com.skala.jellydroid.api;
+package com.skala.jellydroid.net;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
 
-import com.skala.jellydroid.api.ApiHelper.StringResponseListener;
+import com.skala.jellydroid.net.ApiHelper.StringResponseListener;
 
 class FetchUrlTask extends AsyncTask<Object, Void, String> {
 

@@ -1,4 +1,4 @@
-package com.skala.jellydroid.image;
+package com.skala.jellydroid.net;
 
 import java.io.File;
 
@@ -8,8 +8,7 @@ import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.skala.jellydroid.file.FileDownloader;
-import com.skala.jellydroid.file.FileDownloader.FileDownloadListener;
+import com.skala.jellydroid.net.FileDownloader.FileDownloadListener;
 
 /**
  * ImageView that can load remote images quickly and easily.

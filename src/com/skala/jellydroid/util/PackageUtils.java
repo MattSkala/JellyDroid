@@ -1,4 +1,4 @@
-package com.skala.jellydroid.utils;
+package com.skala.jellydroid.util;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;

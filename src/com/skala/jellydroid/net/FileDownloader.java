@@ -1,4 +1,4 @@
-package com.skala.jellydroid.file;
+package com.skala.jellydroid.net;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -14,7 +14,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Environment;
 
-import com.skala.jellydroid.utils.PackageUtils;
+import com.skala.jellydroid.util.PackageUtils;
 
 /**
  * FileDownloader helps with downloading and storing remote files.
