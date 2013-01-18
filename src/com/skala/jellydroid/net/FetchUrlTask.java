@@ -21,9 +21,11 @@ import com.skala.jellydroid.util.Utils;
 class FetchUrlTask extends AsyncTask<Object, Void, String> {
 	private final Context mContext;
 	private StringResponseListener mListener;
+	private final AjaxStatus mStatus;
 
 	public FetchUrlTask(Context context) {
 		mContext = context;
+		mStatus = new AjaxStatus();
 	}
 
 	@Override
@@ -32,6 +34,7 @@ class FetchUrlTask extends AsyncTask<Object, Void, String> {
 		mListener = (StringResponseListener) params[1];
 
 		if (!Utils.isOnline(mContext)) {
+			mStatus.setCode(AjaxStatus.NETWORK_ERROR);
 			return null;
 		}
 
@@ -54,18 +57,19 @@ class FetchUrlTask extends AsyncTask<Object, Void, String> {
 			buf.close();
 			ips.close();
 
+			mStatus.setCode(AjaxStatus.SUCCESS);
 			return sb.toString();
 		} catch (IOException e) {
-			mListener.onError(e);
+			mStatus.setCode(AjaxStatus.NETWORK_ERROR);
 		} catch (URISyntaxException e) {
-			mListener.onError(e);
+			mStatus.setCode(AjaxStatus.NETWORK_ERROR);
 		}
 		return null;
 	}
 
 	@Override
 	protected void onPostExecute(String result) {
-		mListener.onSuccess(result);
+		mListener.onComplete(result, mStatus);
 	}
 
 }
