@@ -23,6 +23,7 @@ public class ApiHelper {
 			public void onComplete(String stringResponse, AjaxStatus status) {
 				if (status.getCode() != AjaxStatus.SUCCESS) {
 					listener.onComplete(null, status);
+					return;
 				}
 
 				JSONObject jsonResponse = null;

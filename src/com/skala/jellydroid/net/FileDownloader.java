@@ -34,7 +34,7 @@ public class FileDownloader {
 	 * @param url URL of the file.
 	 * @param listener Listener to be notified about status.
 	 */
-	public void download(String url, FileDownloadListener listener) {
+	public Cancelable download(String url, FileDownloadListener listener) {
 		File cachedFile = getCachedFile(url);
 		if (cachedFile.exists()) {
 			listener.onSuccess(cachedFile);
@@ -42,6 +42,7 @@ public class FileDownloader {
 			mDownloadTask = new FileDownloadTask(url, listener);
 			mDownloadTask.execute();
 		}
+		return new CancelableTask(mDownloadTask);
 	}
 
 	private File getCachedFile(String url) {

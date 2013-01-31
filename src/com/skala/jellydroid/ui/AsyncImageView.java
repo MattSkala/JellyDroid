@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import com.skala.jellydroid.net.Cancelable;
 import com.skala.jellydroid.net.FileDownloader;
 import com.skala.jellydroid.net.FileDownloader.FileDownloadListener;
 
@@ -18,6 +19,7 @@ import com.skala.jellydroid.net.FileDownloader.FileDownloadListener;
  */
 public class AsyncImageView extends ImageView {
 	private final FileDownloader mDownloader;
+	private Cancelable mCancelable;
 
 	public AsyncImageView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -29,8 +31,8 @@ public class AsyncImageView extends ImageView {
 	 * Loads image from URL into ImageView asynchronously.
 	 * @param url Remote image URL.
 	 */
-	public void loadImage(String url) {
-		loadImage(url, null);
+	public Cancelable loadImage(String url) {
+		return loadImage(url, null);
 	}
 
 	/**
@@ -38,8 +40,12 @@ public class AsyncImageView extends ImageView {
 	 * @param url Remote image URL.
 	 * @param listener Listener to be notified when load is finished.
 	 */
-	public void loadImage(String url, final AsyncImageListener listener) {
-		mDownloader.download(url, new FileDownloadListener() {
+	public Cancelable loadImage(String url, final AsyncImageListener listener) {
+		setImageResource(0);
+		if (mCancelable != null) {
+			mCancelable.cancel();
+		}
+		mCancelable = mDownloader.download(url, new FileDownloadListener() {
 			@Override
 			public void onSuccess(File file) {
 				Bitmap bm = BitmapFactory.decodeFile(file.getAbsolutePath());
@@ -50,6 +56,7 @@ public class AsyncImageView extends ImageView {
 				}
 			}
 		});
+		return mCancelable;
 	}
 
 	public interface AsyncImageListener {
